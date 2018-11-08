@@ -1,0 +1,7 @@
+.batchcontainer {
+	z-index: 0;
+	height: 10vh;
+	border-color: blue;
+	border-width: thin;
+	border-style: solid;
+}

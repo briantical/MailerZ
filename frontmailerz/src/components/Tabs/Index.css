@@ -1,0 +1,52 @@
+.content_area {
+	height: 100%;
+	margin-top: 56px;
+	padding-top: 10px;
+	z-index: -1;
+}
+
+.homeContent {
+	height: 100vh;
+	position: relative;
+	padding: 0 10px;
+}
+
+.batchContainer {
+	padding: 10px;
+	margin-top: 10px;
+	justify-content: space-between;
+	height: 15vh;
+	border-color: blue;
+	border-width: thin;
+	border-style: solid;
+	display: flex;
+	align-items: center;
+}
+
+.batch {
+	padding: 10px;
+	margin-top: 10px;
+	justify-content: space-between;
+	border-color: blue;
+	border-width: thin;
+	border-style: solid;
+	display: flex;
+	align-items: center;
+}
+
+.batchDetails {
+	height: 100%;
+}
+
+.cellHeading {
+	font-weight: bold;
+	font-style: italic;
+	color: #090446
+}
+
+@media (min-width: 628px) {
+	.content_area {
+		margin-left: 400px;
+		z-index: -1;
+	}
+}

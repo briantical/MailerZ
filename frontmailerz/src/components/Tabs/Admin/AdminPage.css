@@ -1,0 +1,53 @@
+.user {
+    display: flex;
+    align-items: center; 
+    justify-content: center  
+}
+
+.userImage {
+    height: 60px;
+    width: 60px;
+    border-radius: 60px;
+    border-color: crimson;
+    align-items: center;    
+    justify-content: center;
+    background-image: url('./avatar.png');
+    background-repeat: no-repeat;
+    background-position: center    
+}
+
+.userName {
+    align-items: center;
+    justify-content: center;
+}
+
+.textContainer {
+    align-items: center;
+    justify-content: center
+}
+
+.trueTextContainer{
+    align-items: center;
+    justify-content: center;
+    background-color: forestgreen
+}
+
+.falseTextContainer{
+    align-items: center;
+    justify-content: center;
+    background-color: darkred
+}
+
+.booleanText{
+    font-style: italic;
+    color: white;
+}
+
+.theMailManTitile{
+    align-self: center;
+}
+
+.theHeadings{
+    align-items: center;
+    justify-content: center
+}

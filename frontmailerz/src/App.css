@@ -1,0 +1,27 @@
+/*The design of the login page*/
+.login_container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 656px;
+  width: 100wh;
+  height: 100vh;
+  background: linear-gradient(-100deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+  background-size: 400% 400%;
+  -webkit-animation: Gradient 15s ease infinite;
+  -moz-animation: Gradient 15s ease infinite;
+  animation: Gradient 15s ease infinite;
+}
+input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #555;
+}
+
+input[type="text"]:focus {
+  border: 1px solid #555;
+}
+
