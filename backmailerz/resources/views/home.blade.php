@@ -12,34 +12,78 @@
             <div class="content">                
                 <div>
                     <table>
-                        <form action="{{ URL::to('/Entries') }}" method="post">
-                            <input type="hidden" name="_token" value="{{csrf_token()}}">
+                        <form action="{{route('admin.store')}}" method="post">
+                            @csrf
                             <tr>
-                                <td>Mailer</td>
-                                <td>Region</td>
-                                <td>Date</td>
-                                <td>Time</td>
-                                <td>Batch of</td>
+                                <td>Batch Id </td>
+                                <td>isDelivered</td>
+                                <td>totalLetters</td>
+                                <td>isComplete</td>
+                                <td>location/Delivery Area</td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="text" name="mailer_name" placeholder="Name...">
+                                    <input type="text" name="batchID" placeholder="Batch...">
                                 </td>
                                 <td>
-                                    <input type="text" name="pickup_region" placeholder="Location...">
+                                    <input type="text" name="isComplete" placeholder="false...">
                                 </td>
                                 <td>
-                                    <input type="text" name="pickup_date" placeholder="01-01-2018">
+                                    <input type="text" name="tDelivered" placeholder="30">
                                 </td>
                                 <td>
-                                    <input type="text" name="pickup_time" placeholder="14:00">
+                                    <input type="text" name="nDelivered" placeholder="0">
                                 </td>
                                 <td>
-                                    <input type="text" name="number" placeholder="20">
+                                    <input type="text" name="location" placeholder="Somewhere">
                                 </td>                                
                             </tr>
                             <tr>
-                                <td colspan="5">
+                                <td>Letter ID</td>
+                                <td>Sender PoBox</td>
+                                <td>Receiver PoBox</td>
+                                <td>isDelivered</td>
+                                <td>Receiver</td>
+                                <td>Received By</td>
+                                <td>Picked up by</td>
+                                <td>Receiver Phone Number</td>
+                                <td>Date Received</td>
+                            </tr>
+                           
+                            <tr>
+                                <td>
+                                    <input type="text" name="letterID" placeholder="LetterID...">
+                                </td>
+                                <td>
+                                    <input type="text" name="senderPoBox" placeholder="Sender POBOX...">
+                                </td>
+                                <td>
+                                    <input type="text" name="receiverPoBox" placeholder="Receiver POBOX">
+                                </td>
+                                <td>
+                                    <select name="isDelivered" >
+                                        <option value="">false</option>
+                                        <option value="">true</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" name="receiver" placeholder="Receiver">
+                                </td>
+                                <td>
+                                    <input type="text" name="receivedBy" placeholder="Received By">
+                                </td> 
+                                <td>
+                                    <input type="text" name="pickupBy">
+                                </td>
+                                
+                                <td>
+                                    <input type="number" name="receiverPhone">
+                                </td>   
+                              
+                                <td>
+                                    <input type="date" name="receivedOn" placeholder="Date Received">
+                                </td><br>
+                                <td colspan="5"><br>
                                     <input type="submit" name="submit" placeholder="SUMBIT">
                                 </td>
                             </tr>

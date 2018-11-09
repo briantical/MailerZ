@@ -1,9 +1,7 @@
 /*The design of the login page*/
 .login_container {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  height: 656px;
+  align-items: center;  
+  justify-content: center;  
   width: 100wh;
   height: 100vh;
   background: linear-gradient(-100deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
@@ -18,10 +16,12 @@ input[type="text"] {
   margin: 8px 0;
   box-sizing: border-box;
   border: none;
+  background-color: transparent;
   border-bottom: 2px solid #555;
 }
 
 input[type="text"]:focus {
   border: 1px solid #555;
+  background-color: transparent;
 }
 

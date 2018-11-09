@@ -10,10 +10,14 @@
     border-radius: 60px;
     border-color: crimson;
     align-items: center;    
-    justify-content: center;
-    background-image: url('./avatar.png');
-    background-repeat: no-repeat;
+    justify-content: center;    
     background-position: center    
+}
+
+.profilePic{
+    height: 60px;
+    width:  60px;
+    border-radius: 60px;
 }
 
 .userName {

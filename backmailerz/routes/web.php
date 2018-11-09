@@ -18,3 +18,5 @@ Route::view('/','welcome');
 Route::post('/Home', "loginController@show");
 Route::post('/Entries', "entriesController@show");
 Route::get('/Upload', "firestoreController@setDocument");
+
+Route::resource('admin','DashboardController');

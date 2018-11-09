@@ -2,6 +2,14 @@
     background-image: url('./Mailers.png');
     background-position: center;
     background-repeat: no-repeat;
+    background-size: contain;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+    height: 40vh;
+    width: auto;
+}
+
+.theFormContainer {
+    justify-content: center;
+    align-items: center;
 }

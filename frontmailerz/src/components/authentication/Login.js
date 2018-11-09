@@ -38,6 +38,7 @@ class Login extends Component {
 			<div className="login_container">
 				<div className="mailersBackgroundImage">
 				</div>
+				<div className="theFormContainer">
 				<form>
 					<table>
 						<tbody>
@@ -75,6 +76,7 @@ class Login extends Component {
 						</tbody>
 					</table>
 				</form>
+				</div>
 			</div>
 		);
 	}

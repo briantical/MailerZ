@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "./AdminPage.css";
 import firebase from "firebase";
-import avatar from './avatar.png'
+
 
 export default class Mailman extends Component {
     constructor(props){
@@ -22,14 +22,14 @@ export default class Mailman extends Component {
 		firebase
 			.firestore()
 			.collection("mailerz")
-            .where("userRoleID", "==", "r0001")
+            .where("userRoleID", "==", "r0002")
             .get()
             .then(snapshot => {
                 snapshot.forEach(doc => {
                     this.setState({
                         users : [...this.state.users,doc.data()]
                     })
-                  console.log(doc.id, '=>', doc.data());
+                  console.log("Data successfully fetched");
                 });
               })
               .catch(err => {
@@ -37,50 +37,10 @@ export default class Mailman extends Component {
               });				
     }
     
-    showRows =()=>{
-        const {users}  = this.state
-        console.log("Its shown")
-        users.map((user, index)=>(            
-            <Fragment>
-                <tr>                                    
-                    <td>
-                        <div className="user">
-                            <div className="userImage">
-                                <img src={require('./avatar.png')} alt='user_profile_picture'/>
-                            </div>
-                            <div className="userName">
-                                <p>{users.length > 0 ? user.userName : " "}</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td>
-                        <div className="textContainer">
-                            <p>{users.length > 0 ? user.userEmail : " "}</p>
-                        </div>                                   
-                    </td>
-                    <td>
-                        <div className="textContainer">
-                            <p>{users.length > 0 ? user.userPhoneNumber : " "}</p>
-                        </div>
-                    </td>
-                    <td>
-                        <div className="textContainer">
-                            <p>{users.length > 0 ? user.userAddress : " "}</p>
-                        </div>
-                    </td>
-                    <td>
-                        <div className="textContainer">
-                            <p>{users.length > 0 ? user.branchID : " "}</p>
-                        </div>
-                    </td>
-                </tr>	
-            </Fragment>
-        ))
-    }
-
+    
 	render() {      
-        const {users}  = this.state
-        console.log("This is user :" + JSON.stringify(this.state.users) )        
+        const {users}  = this.state 
+        console.log("This user: " + users)            
 		return (
 			<Fragment>
 				<div className="batch">
@@ -104,6 +64,7 @@ export default class Mailman extends Component {
                                                 <td>
                                                     <div className="user">
                                                         <div className="userImage">
+                                                            <img alt="profile_pic" src={users.length > 0 ? user.userImage : require('./avatar.png') } className="profilePic"/>                                                            
                                                         </div>
                                                         <div className="userName">
                                                             <p>{users.length > 0 ? user.userName : " "}</p>

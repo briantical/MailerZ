@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import "./AdminPage.css";
 import firebase from "firebase";
-import avatar from './avatar.png'
+
 
 export default class MailmanBatches extends Component {
     constructor(props){
@@ -22,7 +22,7 @@ export default class MailmanBatches extends Component {
 		firebase
 			.firestore()
 			.collection("mailerz")
-            .where("userRoleID", "==", "r0001")
+            .where("userRoleID", "==", "r0002")
             .get()
             .then(snapshot => {
                 snapshot.forEach(doc => {
@@ -30,7 +30,7 @@ export default class MailmanBatches extends Component {
                         users : [...this.state.users,doc.data()],
                         batches :doc.data().batches
                     })
-                  console.log(doc.id, '=>', doc.data());
+                  console.log("Data succesfully fetched");
                 });
               })
               .catch(err => {
@@ -39,8 +39,7 @@ export default class MailmanBatches extends Component {
     }
     
 	render() {      
-        const {users,batches}  = this.state
-        console.log("This is batches :" + JSON.stringify(this.state.batches) )        
+        const {users}  = this.state                
 		return (
 			<Fragment>
 				<div className="batch">
@@ -60,6 +59,7 @@ export default class MailmanBatches extends Component {
                                                 <td>
                                                     <div className="user">
                                                         <div className="userImage">
+                                                        <img alt="profile_pic" src={users.length > 0 ? user.userImage : require('./avatar.png') } className="profilePic"/>                                
                                                         </div>
                                                         <div className="userName">
                                                             <p>{users.length > 0 ? user.userName : " "}</p>
