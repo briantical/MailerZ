@@ -46,7 +46,7 @@ export default class Confirmation extends Component {
 										batchID : batchM.batchID,
 										totalLetters : batchM.totalLetters,
 										isComplete : batchM.isComplete,
-										location : batchM.isComplete,
+										location : batchM.location,
 										letters: batchM.letters.map((letter,index)=>(																							
 												{
 													dateReceived:  letter.dateReceived,
@@ -69,27 +69,27 @@ export default class Confirmation extends Component {
 					
 	}
 
-	makeConfirmation =()=>{			
+	makeConfirmation =(batch)=>{		
 		firebase
 			.firestore()
 			.collection("mailerz")
-			.doc('users')
+			.doc(this.props.personalEmail)
 			.update({
-				batches: this.state.batches2
+				batches: batch
 			})
 			console.log("Update Confirmed")
 	}
 
 	handleChange = event => {
-		this.setState({ [event.target.name]: event.target.value });
-		console.log("This is changinging:" +  event.target.value)
+		this.setState({ [event.target.name]: event.target.value });		
 	};
 
 	updateLetter =()=>{
 		const {specificLetter2, batches2, phoneNumber, receiverName} = this.state
 		const {theActiveLetter, theActiveBatch} = this.props
-
+		
 		var batches3 = batches2
+
 		const today = new Date().toDateString()
 
 		batches3[theActiveBatch].letters[theActiveLetter].dateReceived = today
@@ -101,7 +101,8 @@ export default class Confirmation extends Component {
 		batches3[theActiveBatch].letters[theActiveLetter].receiver = specificLetter2.receiver
 		batches3[theActiveBatch].letters[theActiveLetter].receiverPoBox = specificLetter2.receiverPoBox
 
-		this.setState({batches2 : batches3})				
+		this.setState({batches2 : batches3})			
+		console.log("Letter updated")
 	}
 
 	handleSubmit = event => {
@@ -110,14 +111,14 @@ export default class Confirmation extends Component {
 		console.log("Updated")		
 	};
 
-	fireAway =()=>{
-		this.makeConfirmation()
+	fireAway =(batches)=>{
+		this.makeConfirmation(batches)
 		this.props.changeDisplay();	
+		console.log("FIRED AWAY")
 	}
 
 	render() {
-		const {specificLetter2} = this.state;		
-		console.log('User email' + this.state.personalEmail)
+		const {specificLetter2} = this.state;				
 		return (		
 			<Fragment>
 				<div className="batch">
@@ -181,7 +182,7 @@ export default class Confirmation extends Component {
 										<input
 											type="submit"
 											value="CONFIRM"
-											onClick={this.fireAway}
+											onClick={()=>this.fireAway(this.state.batches2)}
 										/>
 									) }										
 									</td>

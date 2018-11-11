@@ -18,8 +18,10 @@ const Drawer = props => {
 	return (
 		<nav className={drawerClasses}>
 			<div className="profileHeader">
-				<div className="thumbNailHolder">Picture</div>
-				<div className="profileName"> LUTAAYA Brian Ivan</div>
+				<div className="thumbNailHolder">
+					<img alt="profile_pic" src={props.profilePic} className="profilePicture"/>
+				</div>
+				<div className="profileName">{props.profileName}</div>
 			</div>
 			<div className="list" id={1} onClick={props.display}>
 				<div className="listName">

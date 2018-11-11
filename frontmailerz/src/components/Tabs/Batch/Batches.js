@@ -46,8 +46,7 @@ export default class Batches extends Component {
 	
 	
 
-	render() {
-		console.log('Batches in render')
+	render() {		
 		return (
 			<Fragment>				
 				{this.state.batches.map((batch, index) => (

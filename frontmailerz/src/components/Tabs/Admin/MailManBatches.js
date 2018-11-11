@@ -45,12 +45,12 @@ export default class MailmanBatches extends Component {
 				<div className="batch">
 					<div className="batchDetails">
                         <div className="theHeadings">
-                            <h2 className="theMailManTitile">THE BATCHES</h2>   
+                            <h4 className="theMailManTitile">THE BATCHES</h4>   
                         </div>                        
 						<table>
 							<tbody>
 								<tr>                                      
-									<td>PROFILE</td>									
+									<th>PROFILE</th>									
 								</tr>
                                 {
                                     users.map((user, index)=>(            
@@ -68,26 +68,26 @@ export default class MailmanBatches extends Component {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <th>
                                                     <div className="textContainer">
                                                         <p>BATCH ID</p>
                                                     </div>                                   
-                                                </td>
-                                                <td>
+                                                </th>
+                                                <th>
                                                     <div className="textContainer">
                                                         <p>TOTAL BATCH LETTERS</p>
                                                     </div>                                   
-                                                </td>
-                                                <td>
+                                                </th>
+                                                <th>
                                                     <div className="textContainer">
                                                         <p>BATCH COMPLETE</p>
                                                     </div>                                   
-                                                </td>
-                                                <td>
+                                                </th>
+                                                <th>
                                                     <div className="textContainer">
                                                         <p>DELIVERY AREA</p>
                                                     </div>                                   
-                                                </td>
+                                                </th>
                                             </tr>
                                             {users.length <= 0 ? null :  user.batches.map((batch,index)=>(
                                                 <Fragment key={index}>
@@ -108,8 +108,8 @@ export default class MailmanBatches extends Component {
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div className="textContainer">
-                                                                {user.batches.length > 0 ? batch.location : " "}
+                                                            <div className="textContainer">                                                                
+                                                                <p>{user.batches.length > 0 ? batch.isComplete ? batch.location : "N/A" : " "}</p>
                                                             </div>
                                                         </td>
                                                     </tr>	

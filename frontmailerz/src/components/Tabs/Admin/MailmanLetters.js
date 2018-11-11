@@ -45,12 +45,12 @@ export default class MailmanLetters extends Component {
 				<div className="batch">
 					<div className="batchDetails">
                         <div className="theHeadings">
-                            <h2 className="theMailManTitile">THE LETTERS</h2>   
+                            <h4 className="theMailManTitile">THE LETTERS</h4>   
                         </div>                        
 						<table>
 							<tbody>
 								<tr>                                      
-									<td>PROFILE</td>									
+									<th>PROFILE</th>									
 								</tr>
                                 {
                                     users.map((user, index)=>(            
@@ -68,36 +68,36 @@ export default class MailmanLetters extends Component {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>
+                                                <th>
                                                     <div className="textContainer">
                                                         <p>LETTER ID</p>
                                                     </div>                                   
-                                                </td>
-                                                <td>
+                                                </th>
+                                                <th>
                                                     <div className="textContainer">
                                                         <p>RECEIVER</p>
                                                     </div>                                   
-                                                </td>
-                                                <td>
+                                                </th>
+                                                <th>
                                                     <div className="textContainer">
                                                         <p>DELIVERY LOCATION</p>
                                                     </div>                                   
-                                                </td>
-                                                <td>
+                                                </th>
+                                                <th>
                                                     <div className="textContainer">
                                                         <p>DELIVERED</p>
                                                     </div>                                   
-                                                </td>
-                                                <td>
+                                                </th>
+                                                <th>
                                                     <div className="textContainer">
                                                         <p>RECEIVED BY</p>
                                                     </div>                                   
-                                                </td>                                                
-                                                <td>
+                                                </th>                                                
+                                                <th>
                                                     <div className="textContainer">
                                                         <p>RECEIVED ON</p>
                                                     </div>                                   
-                                                </td>
+                                                </th>
                                             </tr>
                                             {users.length <= 0 ? null :  user.batches.map((batch,index)=>(
                                                 <Fragment key={index}>
@@ -126,12 +126,12 @@ export default class MailmanLetters extends Component {
                                                                 </td>
                                                                 <td>
                                                                     <div className="textContainer">
-                                                                        {batch.letters.length > 0 ? letter.isDelivered ? letter.receivedBy : "N/A" : " "}
+                                                                        <p>{batch.letters.length > 0 ? letter.isDelivered ? letter.receivedBy : "N/A" : " "}</p>
                                                                     </div>
                                                                 </td>
                                                                 <td>
                                                                     <div className="textContainer">
-                                                                        {batch.letters.length > 0 ? letter.isDelivered ? letter.dateReceived : "N/A" : " "}
+                                                                        <p>{batch.letters.length > 0 ? letter.isDelivered ? letter.dateReceived : "N/A" : " "}</p>
                                                                     </div>
                                                                 </td>
                                                             </tr>	

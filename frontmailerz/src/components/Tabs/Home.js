@@ -42,20 +42,21 @@ class Home extends Component {
 			.onSnapshot(querySnapshot => {
 				querySnapshot.forEach(doc => {
 					this.setState({
-						roleID : doc.data().userRoleID
+						roleID : doc.data().userRoleID						
 					})
 				})
 			})
 	}
 
-	checkPermission=(theIndex)=>{
+	checkPermission=(theIndex)=>{		
 		const {roleID}  = this.state
+		console.log("user roleID" + roleID)
 		if(roleID === 'r0001'){
 			return <AdminPage/>
 		}else if(roleID === 'r0002'){
 			return this.show(theIndex)
 		}else{
-			console.log("Invalid user")
+			console.log("user" + theIndex)
 		}		
 	}
 

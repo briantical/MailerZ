@@ -45,11 +45,11 @@
 }
 
 .thumbNailHolder {
-	border-radius: 50px;
+	border-radius: 62px;
 	border-width: 1;
 	border-color: #fff;
-	height: 50px;
-	width: 50px;
+	height: 62px;
+	width: 62px;
 	justify-content: center;
 	align-items: center;
 	color: #090446;
@@ -57,6 +57,12 @@
 	background: #fff;
 }
 
+.profilePicture{
+    height: 60px;
+    width:  60px;
+	border-radius: 60px;
+	align-self: center;
+}
 .list {
 	height: 10%;
 	align-items: center;

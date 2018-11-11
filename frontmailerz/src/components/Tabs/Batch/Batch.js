@@ -23,8 +23,7 @@ export default class Batches extends Component {
 			.collection("mailerz")
 			.where("userEmail", "==", this.props.personalEmail)
 			.onSnapshot(querySnapshot => {
-				querySnapshot.forEach(doc => {
-					console.log('The Doc: ' + JSON.stringify(doc.data().batches))
+				querySnapshot.forEach(doc => {					
 					this.setState({batches: doc.data().batches, letters: doc.data().batches[this.props.theActiveBatch].letters})
 				});
 			});

@@ -13,13 +13,46 @@ import About from "./Pages/About";
 import Home from "./Home";
 import "./Index.css";
 
+import firebase from "firebase";
+
 class Index extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			activeDisplay: 2,
-			drawerVisible: false
+			drawerVisible: false,
+			userImage : "",
+			userName: ""
 		};
+	}
+
+	componentDidMount(){		
+		firebase.auth().onAuthStateChanged(user => {
+			if (user) {
+				this.getUserImage(user.email)
+			} else {
+				this.setState({ userImage: null });
+			}
+		});		
+	}
+
+	getUserImage=(userEmail)=>{
+		const firestore = firebase.firestore();
+		const settings = {/* your settings... */ timestampsInSnapshots: true};
+		firestore.settings(settings); 
+		
+		firebase
+			.firestore()
+			.collection("mailerz")
+			.where("userEmail", "==", userEmail)
+			.onSnapshot(querySnapshot => {
+				querySnapshot.forEach(doc => {
+					this.setState({
+						userImage : doc.data().userImage,
+						userName: doc.data().userName
+					})
+				})
+			})
 	}
 
 	openDrawer = () => {
@@ -31,6 +64,7 @@ class Index extends Component {
 	closeDrawer = () => {
 		this.setState({ drawerVisible: false });
 	};
+
 	signout = () => {
 		FireConfig.auth()
 			.signOut()
@@ -74,7 +108,9 @@ class Index extends Component {
 				<Header clickDrawer={this.openDrawer} />
 				<Drawer
 					show={this.state.drawerVisible}
+					profilePic={this.state.userImage}
 					display={this.changeDisplay}
+					profileName={this.state.userName}
 				/>
 				{the_backdrop}
 				<div className="content_area">

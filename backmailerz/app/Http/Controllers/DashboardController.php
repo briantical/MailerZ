@@ -61,7 +61,7 @@ class DashboardController extends Controller
 
         $lettter->save();
         
-        return redirect()->roiute('admin.index');
+        return redirect()->route('admin.index');
        
     }
 

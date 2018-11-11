@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import "./AdminPage.css";
 import firebase from "firebase";
 
-
 export default class Mailman extends Component {
     constructor(props){
         super(props)
@@ -46,16 +45,16 @@ export default class Mailman extends Component {
 				<div className="batch">
 					<div className="batchDetails">
                         <div className="theHeadings">
-                            <h2 className="theMailManTitile">THE MAILMEN</h2>   
+                            <h4 className="theMailManTitile">THE MAILMEN</h4>   
                         </div>                        
 						<table>
 							<tbody>
 								<tr>                                      
-									<td>PROFILE</td>
-									<td>EMAIL</td>
-                                    <td>PHONE NUMBER</td>
-                                    <td>ADDRESS</td>
-                                    <td>BRANCH</td>
+									<th>PROFILE</th>
+									<th>EMAIL</th>
+                                    <th>PHONE NUMBER</th>
+                                    <th>ADDRESS</th>
+                                    <th>BRANCH</th>
 								</tr>
                                 {
                                     users.map((user, index)=>(            
@@ -88,7 +87,7 @@ export default class Mailman extends Component {
                                                 </td>
                                                 <td>
                                                     <div className="textContainer">
-                                                        {users.length > 0 ? user.branchID : " "}
+                                                        <p>{users.length > 0 ? user.branchID : " "}</p>
                                                     </div>
                                                 </td>
                                             </tr>	
