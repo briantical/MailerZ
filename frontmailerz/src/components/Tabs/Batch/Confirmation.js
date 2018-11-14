@@ -90,7 +90,7 @@ export default class Confirmation extends Component {
 		
 		var batches3 = batches2
 
-		const today = new Date().toDateString()
+		const today = new Date()
 
 		batches3[theActiveBatch].letters[theActiveLetter].dateReceived = today
 		batches3[theActiveBatch].letters[theActiveLetter].isDelivered = true
@@ -140,7 +140,12 @@ export default class Confirmation extends Component {
 								<tr>
 									<td className="cellHeading">RECEIVED ON:</td>
 									<td>
-										{new Date().toDateString()}
+									{specificLetter2.isDelivered ? specificLetter2.dateReceived : (
+										new Date().toDateString())}
+									</td>
+									<td>
+									{specificLetter2.isDelivered ?  specificLetter2.dateReceived === "Today" ? new Date().toLocaleTimeString() : new Date(specificLetter2.dateReceived).toTimeString().split(" ")[0] : (
+										new Date().toLocaleTimeString())}
 									</td>
 								</tr>
 								<tr>

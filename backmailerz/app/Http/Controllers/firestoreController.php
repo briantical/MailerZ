@@ -6,7 +6,9 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Morrislaptop\Firestore\Factory;
 use Kreait\Firebase\ServiceAccount;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 
 
 class firestoreController extends Controller
@@ -14,99 +16,69 @@ class firestoreController extends Controller
     
     public function setDocument()
     {        
-        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__ . '/authfile.json');
-        $firestore = (new Factory)
+
+        $users = DB::select('select * from users');
+        $batches = DB::select('select * from batch');
+        $letters = DB::select('select * from letters');
+    
+        foreach ($users as $index => $user) { 
+            $fbatch= array();
+            $fletter=array();
+
+            $serviceAccount = ServiceAccount::fromJsonFile(__DIR__ . '/authfile.json');
+            $firestore = (new Factory)
             ->withServiceAccount($serviceAccount)
             ->createFirestore();
 
             $collection = $firestore->collection('mailerz');
-            $user = $collection->document('lutbrianivan@gmail.com');
+            $fireUser = $collection->document($user->userEmail); 
+            
+            foreach ($batches as $index => $batch) {
+                if(($batch->userID) == ($user->userID)){
 
-            // Save a document
-            $letter1 = array(
-                'dateReceived' =>"Today",
-                'isDelivered' =>false,
-                'letterID' => "l0006",
-                'location' => "Kyambogo",                                        
-                'phoneNumber' => "00000000000000",                                        
-                'receivedBy' => "owner",
-                'receiver' => "Odongo Isaac",
-                'receiverPoBox' =>"3212 Banda"
-            );
-            $letter2 = array(
-                'dateReceived' =>"Today",
-                'isDelivered' =>false,
-                'letterID' => "l0007",
-                'location' => "Kireka",                                        
-                'phoneNumber' => "00000000000000",                                        
-                'receivedBy' => "owner",
-                'receiver' => "Ronnie Curtis",
-                'receiverPoBox' =>"3245 Banda"
-            );
-
-            $batch1 = array(
-                        'batchID' => 'b0006',
-                        'isComplete' => false,
-                        'totalLetters' => 5,
-                        'location'=> 'Banda',
-                        'letters' => array(
-                            $letter1,
-                            $letter2
+                    foreach ($letters as $index => $letter) {
+                        if(($letter->batchID) == ($batch->batchID)){
+                            array_push($fletter,
+                                    array(
+                                        'dateReceived' =>"Today",
+                                        'isDelivered' =>false,
+                                        'letterID' => $letter->letterID,
+                                        'location' => $batch->location,                                        
+                                        'phoneNumber' => "00000000000000",                                        
+                                        'receivedBy' => "owner",
+                                        'receiver' => "check PoBox",
+                                        'receiverPoBox' =>$letter->receiverPoBox
+                                    )
+                                    ); 
+                        }
+                    }
+                    array_push(
+                        $fbatch,
+                        array(
+                            'batchID' => $batch->batchID,
+                            'isComplete' => false,
+                            'totalLetters' => $batch->totalLetters,
+                            'location'=> $batch->location,
+                            'letters' => $fletter
                         )
-                        );
-           
-            $letter3 = array(
-                'dateReceived' =>"Today",
-                'isDelivered' =>false,
-                'letterID' => "l0008",
-                'location' => "Kazo",                                        
-                'phoneNumber' => "00000000000000",                                        
-                'receivedBy' => "owner",
-                'receiver' => "Odongo Ernest",
-                'receiverPoBox' =>"3212 Mpigi"
-            );
-            
-            $letter4 = array(
-                'dateReceived' =>"Today",
-                'isDelivered' =>false,
-                'letterID' => "l0009",
-                'location' => "Kamwenge",                                        
-                'phoneNumber' => "00000000000000",                                        
-                'receivedBy' => "owner",
-                'receiver' => "Okello Curtis",
-                'receiverPoBox' =>"3245 Mpigi"
-            );
+                        );                    
+                }
+            }
 
-            $batch2 =array(
-                'batchID' => 'b0005',
-                'isComplete' => false,
-                'totalLetters' => 30,
-                'location'=> 'Mpigi',
-                'letters' => array(
-                    $letter3,
-                    $letter4
-                )
-                );
-
-            
-            $user->set([
-                'userName' => 'Lutaaya Brian Ivan',
-                'userEmail' => 'lutbrianivan@gmail.com',
-                'userPhoneNumber' => '+256789566944',
-                'userPassword' => '1234567',
-                'userAddress' => 'Kikoni',                
-                'userRoleID' => 'r0001',
-                'userID' => 'u0001',
-                'branchID' => 'br001',
-                'userImage' => 'none',
-                'batches' => array(
-                   "nothing"
-                )                
+            $fireUser->set([
+                'userName' => $user->userName ,
+                'userEmail' => $user->userEmail,
+                'userPhoneNumber' => $user->userPhoneNumber,
+                'userPassword' => $user->userPassword,
+                'userAddress' => $user->userAddress,                
+                'userRoleID' => $user->userRoleID,
+                'userID' => $user->userID,
+                'branchID' => $user->branchID,
+                'userImage' => "null",
+                'batches' => $fbatch              
                 ]);
-            echo '<h1>Firestore data is set</h1>';
-            // Get a document
-           // $snap = $user->snapshot();
-            //echo $snap['name']; // morrislaptop
+        }
+        
     }
 
     public function getDocument()

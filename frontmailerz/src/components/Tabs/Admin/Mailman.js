@@ -63,7 +63,7 @@ export default class Mailman extends Component {
                                                 <td>
                                                     <div className="user">
                                                         <div className="userImage">
-                                                            <img alt="profile_pic" src={users.length > 0 ? user.userImage : require('./avatar.png') } className="profilePic"/>                                                            
+                                                        <img alt="profile_pic" src={users.length > 0 ? user.userImage === "null" ?  "https://firebasestorage.googleapis.com/v0/b/mailerz-fbb71.appspot.com/o/Profile%2Favatar.png?alt=media&token=e9f1053b-bba4-4d4d-8cc0-2f338bdde003" : user.userImage : require('./avatar.png') } className="profilePic"/>
                                                         </div>
                                                         <div className="userName">
                                                             <p>{users.length > 0 ? user.userName : " "}</p>

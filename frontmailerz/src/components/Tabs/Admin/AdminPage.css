@@ -1,3 +1,8 @@
+table{
+    table-layout:fixed;
+    width:100%;
+}
+
 .user {
     display: flex;
     align-items: center; 
@@ -54,4 +59,10 @@
 .theHeadings{
     align-items: center;
     justify-content: center
+}
+
+.lowerBorder{
+    border-bottom-width: 2px;
+    border-bottom-style: double;
+    border-bottom-color: darkblue;
 }

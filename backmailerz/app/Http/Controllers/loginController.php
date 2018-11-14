@@ -15,7 +15,13 @@ class loginController extends Controller
     	$dbPassword = $results[0]->userPassword;
 
     	if(($request->input('email') == $dbEmail) && ($request->input('password') == $dbPassword)){    		
-    		return view('home');
+    		return view('home2');
     	}    	   	
-    }
+	}
+
+	public function display(Request $request)
+    {    	    	  		
+    	return view('home2');       	   	
+	}
+	
 }

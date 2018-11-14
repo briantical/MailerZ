@@ -15,8 +15,10 @@
    // return view('welcome');
 //});
 Route::view('/','welcome');
-Route::post('/Home', "loginController@show");
-Route::post('/Entries', "entriesController@show");
+Route::view('/Home2','home');
+Route::post('/Home',"loginController@show");
+Route::post('/Home2', "entriesController@createLetters");
+Route::post('/Entries', "entriesController@createBatch");
 Route::get('/Upload', "firestoreController@setDocument");
 
 Route::resource('admin','DashboardController');

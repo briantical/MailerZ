@@ -40,7 +40,7 @@ class Login extends Component {
 				</div>
 				<div className="theFormContainer">
 				<form>
-					<table>
+					<table width="400px">
 						<tbody>
 							<tr>
 								<td>Email: </td>
@@ -58,7 +58,7 @@ class Login extends Component {
 								<td>
 									<input
 										name="password"
-										type="text"
+										type="password"
 										value={this.state.password}
 										onChange={this.handleChange}
 									/>
