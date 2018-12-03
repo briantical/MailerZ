@@ -1,0 +1,88 @@
+.pageContainer{
+    height: 100%;
+    width: 100%;
+    background-color: #ffffff
+}
+.pageHeader {
+	display: flex;
+	height: 7vh;	
+    color: #ffffff;
+    background-color: #090446;
+	padding: 0px 10px;
+	justify-content: flex-start;
+	align-items: center;
+	font-size: medium;
+}
+.pageContent {    
+    padding: 0 10px;
+    font-size: small; 
+}
+.projectContent {
+    font-size: small	
+}
+
+.assignmentList{
+    font-size: small
+}
+ul, ol {
+    padding-left: 20px;
+    font-size: small;
+    font-style: italic;
+}
+.links{
+    text-decoration: none;
+    color: #090446;
+}
+.imageContainer{
+    height: 62px;
+    width: 62px;
+    border-radius: 62px;
+    border-width: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+.imageStyle{
+    height: 60px;
+    width: 60px;
+    border-radius: 60px;
+}
+.cellHeaders{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: small; 
+    font-weight: bold;
+    color: #090446   ;
+}
+.cellValues{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: small; 
+    color: #090446 
+}
+.signoutBtn{
+    height: 40px;
+    width: 70px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 2px;
+    border-radius: 20px;
+    background-color: #090446;
+    align-self: center
+}
+.theBtnsignout{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.uploadProfile{
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: #090446;
+    border-style: double;
+}

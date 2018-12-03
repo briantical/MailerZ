@@ -5,11 +5,16 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\BatchRequest;
+use App\Http\Requests\LetterRequest;
 
 class entriesController extends Controller
 {
-    public function createBatch(Request $request)
-    {    
+    public function createBatch(BatchRequest $request)
+    {   
+
+        $validated = $request->validated();
+
         $batches = $request->input('totalLetters');
         
         $batchID = $request->input('batchID'); 
@@ -21,34 +26,37 @@ class entriesController extends Controller
         $success = DB::insert('insert into batch (batchID, userID, totalLetters, isComplete, location) values (?,?,?,?,?)', [$batchID, $userID,$totalLetters,$isComplete,$location]);
 
         if($success){
-            return view('batch', ['batchID'=>$batchID,'entries'=> $totalLetters, 'userID'=>$userID]);
+            return view('letters', ['batchID'=>$batchID,'entries'=> $totalLetters, 'userID'=>$userID]);
         }    	   	
     }
 
     public function createLetters(Request $request)
-    {            
-        $letters = $request->post();
-        $letter = array_slice($letters, 1,9);        
+    {    
+        //$validated = $request->validated();
+
+        $letters = $request->all();
+        $letter = array_slice($letters, 1,9);  
         
-        for ($x = 0; $x < 1 ; $x++){
-            for ($y = 0; $y <(sizeof($letter['letterID'])) ; $y++){
-                $letterID = $letter['letterID'][$y];      
-                $senderPoBox = $letter['senderPoBox'][$y];
-                $receiverPoBox = $letter['receiverPoBox'][$y];  
-                $isDelivered = $letter['isDelivered'][$y];
-                $pickupDate = $letter['pickupDate'][$y];
-                $pickupTime = $letter['pickupTime'][$y];
-                $userID = $letter['userID'][$y];
-                $batchID = $letter['batchID'][$y];
-                
+        for ($y = 0; $y <(sizeof($letter['letterID'])) ; $y++){
 
-                $success = DB::insert('insert into letters (letterID, senderPoBox,receiverPoBox,isDelivered,pickupDate,pickupTime,userID,batchID) values (?,?,?,?,?,?,?,?)', [$letterID, $senderPoBox,$receiverPoBox,0,$pickupDate,$pickupTime, $userID, $batchID]);
-                
-                if($success){
-                    return view('batch2');
-                }
+            $results = DB::select("SELECT * FROM `mailer` where `mailerPoBox`= ?", [$letter['receiverPoBox'][$y]]);
+            $receiverPhone = (empty($results)) ? "+2560000000" : $results[0]->mailerPhoneNumber ;
+            $receiverAddress = (empty($results)) ? "No contact Address" : $results[0]->mailerAddress ;
 
-            }
-    }
+            $letterID = $letter['letterID'][$y];      
+            $senderPoBox = $letter['senderPoBox'][$y];
+            $receiverPoBox = $letter['receiverPoBox'][$y];  
+            $isDelivered = $letter['isDelivered'][$y];
+            $pickupDate = $letter['pickupDate'][$y];
+            $pickupTime = $letter['pickupTime'][$y];                
+            $batchID = $letter['batchID'][$y];
+            $location = $receiverAddress;
+            $phoneNumber = $receiverPhone;
+            $receivedBy = "owner";
+            
+            $success = DB::insert('insert into letters (letterID,batchID,receiverPoBox,isDelivered,pickupDate,pickupTime,senderPoBox,location,receivedBy,phoneNumber) values (?,?,?,?,?,?,?,?,?,?)', [$letterID,$batchID,$receiverPoBox,$isDelivered,$pickupDate,$pickupTime,$senderPoBox,$location,$receivedBy,$phoneNumber]);                
+        }
+        return view('home', ['message' => 'Entry successful!']);
+         
     }
 }

@@ -10,7 +10,7 @@ import {
 } from "@material-ui/icons";
 
 import "./Drawer.css";
-const Drawer = props => {	
+const Drawer = props => {
 	let drawerClasses = "drawer";
 	if (props.show) {
 		drawerClasses = "drawer open";
@@ -19,9 +19,13 @@ const Drawer = props => {
 		<nav className={drawerClasses}>
 			<div className="profileHeader">
 				<div className="thumbNailHolder">
-					<img alt="profile_pic" src={props.profilePic} className="profilePicture"/>
+					<img
+						alt="profile_pic"
+						src={props.profilePic !== "" ?  props.profilePic : require('./avatar.png')}
+						className="profilePicture"
+					/>
 				</div>
-				<div className="profileName">{props.profileName}</div>
+				<div className="profileName">{props.profileName !== "" ? props.profileName : "user name"}</div>
 			</div>
 			<div className="list" id={1} onClick={props.display}>
 				<div className="listName">

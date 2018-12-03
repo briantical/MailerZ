@@ -17,9 +17,9 @@ class firestoreController extends Controller
     public function setDocument()
     {        
 
-        $users = DB::select('select * from users');
-        $batches = DB::select('select * from batch');
-        $letters = DB::select('select * from letters');
+        $users = DB::select('SELECT * FROM users WHERE `userRoleID` = ?', ['r0002']);
+        $batches = DB::select('SELECT * FROM batch');
+        $letters = DB::select('SELECT * FROM letters');
     
         foreach ($users as $index => $user) { 
             $fbatch= array();
@@ -43,10 +43,10 @@ class firestoreController extends Controller
                                         'dateReceived' =>"Today",
                                         'isDelivered' =>false,
                                         'letterID' => $letter->letterID,
-                                        'location' => $batch->location,                                        
-                                        'phoneNumber' => "00000000000000",                                        
-                                        'receivedBy' => "owner",
-                                        'receiver' => "check PoBox",
+                                        'location' => $letter->location,                                        
+                                        'phoneNumber' => $letter->phoneNumber,                                        
+                                        'receivedBy' => $letter->receivedBy,
+                                        'receiver' =>(empty((DB::select("SELECT mailerName FROM `mailer` where `mailerPoBox`= ?", [$letter->receiverPoBox])))) ? "Unknown" : ((DB::select("SELECT mailerName FROM `mailer` where `mailerPoBox`= ?", [$letter->receiverPoBox]))[0]->mailerName),
                                         'receiverPoBox' =>$letter->receiverPoBox
                                     )
                                     ); 
@@ -77,6 +77,16 @@ class firestoreController extends Controller
                 'userImage' => "null",
                 'batches' => $fbatch              
                 ]);
+        }
+        if($fireUser){
+            $deletedBatches = DB::delete('DELETE FROM batch');
+            $deletedLetters = DB::delete('DELETE FROM letters');
+
+            if($deletedBatches && $deletedLetters){
+                return view('home', ['message'=>'Data has been successfully uploaded']);
+            }
+        }else{
+            return view('home', ['message'=>'Failed Upload']);
         }
         
     }

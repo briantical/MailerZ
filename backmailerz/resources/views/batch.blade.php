@@ -6,65 +6,84 @@
         <title>Batch</title>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+        <style>
+             .full-height {
+                height: 100vh;
+            }
+         
+            .corneredMailerz{
+                color: #636b6f;
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                font-weight: bold;
+                font-size: 50px;
+                padding-right: 50px;
+                padding-top: 20px;
+            }
+            .tableDisplay{
+                margin-top: 50px;
+                margin-left: 40px;
+            }
+        </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">            
-            <div class="content">                
-                <div>                   
+        <div class="full-height">            
+            <div class="corneredMailerz">
+                MailerZ
+            </div>             
+                <div class="tableDisplay">
                     <table>
-                        <form action="{{ URL::to('/Home2') }}" method="post">
-                            @csrf 
+                        <form action="{{ URL::to('/Letters') }}" method="post" autocomplete="off">
+                            @csrf
                             <tr>
-                                <td>Letter ID</td>
-                                <td>Sender PoBox</td>
-                                <td>Receiver PoBox</td>
-                                <td>isDelivered</td>
-                                <td>Receiver</td>                                
-                                <td>Pickup Date</td>
-                                <td>Pickup Time</td>
-                                <td>MailMan</td>
+                                <th>Batch Id </th>                        
+                                <th>Total Batch Letters</th>                                
+                                <th>Delivery Area</th>
+                                <th>Mail man</th>
                             </tr>
-                            @for ($x = 0; $x < $entries ; $x++)
                             <tr>
                                 <td>
-                                    <input type="text" name="letterID[]" placeholder="LetterID...">
-                                </td>
-                                <td>
-                                    <input type="text" name="senderPoBox[]" placeholder="Sender POBOX...">
-                                </td>
-                                <td>
-                                    <input type="text" name="receiverPoBox[]" placeholder="Receiver POBOX">
-                                </td>
-                                <td>
-                                    <select name="isDelivered[]" >
-                                        <option value="">false</option>
-                                        <option value="">true</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="text" name="receiver[]" placeholder="Receiver">
-                                </td>
-                                <td>
-                                    <input type="date" name="pickupDate[]" placeholder="dd/mm/yyyy">
-                                </td> 
-                                <td>
-                                    <input type="text" name="pickupTime[]" placeholder="00:00">
+                                    <input type="text" name="batchID" placeholder="b0000" value="{{ old('batchID') }}" maxlength="5">
                                 </td>                                
                                 <td>
-                                    <input type="hidden" name="batchID[]" value={{$batchID}}>
-                                </td>
+                                    <input type="number" name="totalLetters" placeholder="30" value="{{ old('totalLetters') }}" maxlength="50">
+                                </td>                                
                                 <td>
-                                    <input type="hidden" name="userID[]" value={{$userID}}>
-                                </td>                                 
+                                    <input type="text" name="location" placeholder="Somewhere" value="{{ old('location') }}" maxlength="15"> 
+                                </td> 
+                                <td>                                    
+                                    <select name="userID">
+                                        <?php
+                                            function selectCreator(){
+                                                $users = \DB::select('SELECT * FROM `users` where `userRoleID` = ?', ['r0002']);
+                                                return $users;
+                                            }
+                                            $userE = selectCreator();                                                                 
+                                            foreach ($userE as $key => $user) {?>
+                                             <option value="<?=($user->userID)?>"> <?=($user->userName)?> </option>
+                                            <?php }
+                                            
+                                        ?>
+                                    </select>                                  
+                                </td> 
+                                  <input type="hidden" name="totalDelivered" value=0>
+                                  <input type="hidden" name="isComplete" value=0>                             
                             </tr>
-                            @endfor                                                                                                          
-                            <tr>
-                                <td>
-                                <input type="submit" name="submit" placeholder="SUBMIT">
-                                </td>
-                            </tr>
+                            <tr><td colspan="5" align="center"><input type="submit" name="submit"></td></tr>                            
                         </form>
-                    </table>
+                    </table>                    
+                    @if(count($errors))
+                        <div>
+                            <div>
+                                <ul>
+                                    @foreach($errors->all() as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    @endif
                 </div>                                        
             </div>
         </div>

@@ -14,11 +14,10 @@
 //Route::get('/', function () {
    // return view('welcome');
 //});
-Route::view('/','welcome');
-Route::view('/Home2','home');
-Route::post('/Home',"loginController@show");
-Route::post('/Home2', "entriesController@createLetters");
-Route::post('/Entries', "entriesController@createBatch");
-Route::get('/Upload', "firestoreController@setDocument");
 
-Route::resource('admin','DashboardController');
+Route::view('/','welcome');
+Route::view('/Batch','batch');
+Route::post('/Home',"loginController@show");
+Route::post('/Letters', "entriesController@createBatch");
+Route::post('/Batch', "entriesController@createLetters");
+Route::get('/Upload', "firestoreController@setDocument");

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import FireConfig from "../FirebaseConfig/FireConfig";
+import firebase from "firebase";
 
 export class Signup extends Component {
 	constructor(props) {
@@ -22,7 +22,7 @@ export class Signup extends Component {
 		this.createUser(this.state.email, this.state.password);
 	}
 	createUser(email, password) {
-		FireConfig.auth()
+		firebase.auth()
 			.createUserWithEmailAndPassword(email, password)
 			.then("user successfully created")
 			.catch(error => {

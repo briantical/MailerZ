@@ -1,7 +1,48 @@
-.batchcontainer {
-	z-index: 0;
-	height: 10vh;
-	border-color: blue;
-	border-width: thin;
-	border-style: solid;
+
+.mailersContainer{
+	height: 100%;
+	width: 100%;
+	background-color: #FFF;	
+}
+.mailersHeader{	
+	height: 5vh;
+	background-color: #090446;	
+	padding-left: 10px;	
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	color: #FFF;
+	font-size: medium
+}
+
+.theBatchContainer{
+	box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
+	margin-top: 10px;
+	display: flex;
+	align-items: center
+}
+
+.theBatchDetails{	
+	height: 100%;
+}
+
+.batchIndex{
+	font-size: small;		
+	color: #090446;
+	padding-left: 4px;	
+}
+.batchCellHeaders{
+	color: #090446;
+	text-align: left;
+	padding-left: 10px;
+	font-size: small;
+	font-weight: bold;
+}
+
+.batchCellValues{
+	color: #090446;
+	text-align: left;
+	padding-left: 0px;
+	font-size: small;
+	font-style: italic;
 }

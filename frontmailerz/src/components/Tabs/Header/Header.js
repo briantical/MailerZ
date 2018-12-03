@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import {	HelpOutline} from "@material-ui/icons";
+
 import "./Header.css";
 import DrawerButton from "../Drawer/DrawerButton";
 class Header extends Component {
@@ -14,12 +16,9 @@ class Header extends Component {
 					</div>
 					<div className="spacer" />
 					<div className="header_tabs">
-						<ul>
-							<li>
-								<a href="">Settings</a>
-							</li>
-							<li>
-								<a href="">Help</a>
+						<ul>							
+							<li>								
+								<a href="">Help <HelpOutline/></a>
 							</li>
 						</ul>
 					</div>

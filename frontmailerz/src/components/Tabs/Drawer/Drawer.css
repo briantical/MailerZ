@@ -1,6 +1,6 @@
 .drawer {
 	height: 100vh;
-	background: white;
+	background: #090446;
 	box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
 	position: fixed;
 	top: 56px;
@@ -45,11 +45,11 @@
 }
 
 .thumbNailHolder {
-	border-radius: 62px;
-	border-width: 1;
+	border-radius: 50%;
+	border-width: 2px;
 	border-color: #fff;
-	height: 62px;
-	width: 62px;
+	height: 100%;
+	width: auto;
 	justify-content: center;
 	align-items: center;
 	color: #090446;
@@ -58,16 +58,18 @@
 }
 
 .profilePicture{
-    height: 60px;
-    width:  60px;
-	border-radius: 60px;
+    height: 92%;
+    width:  auto;
+	border-radius: 50%;
+	padding: 2px;
 	align-self: center;
 }
 .list {
-	height: 10%;
+	height: 13%;
 	align-items: center;
 	font-weight: bold;
 	color: #090446;
+	background-color: #fff;
 	border-bottom-color: #090446;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;

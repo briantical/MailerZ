@@ -6,8 +6,6 @@
     "@material-ui/core": "^3.2.2",
     "@material-ui/icons": "^3.0.1",
     "firebase": "^5.5.1",
-    "flatted": "^2.0.0",
-    "nodemon": "^1.18.4",
     "react": "^16.5.2",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.5.2",

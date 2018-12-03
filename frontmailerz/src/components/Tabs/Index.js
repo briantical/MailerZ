@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import FireConfig from "../FirebaseConfig/FireConfig";
+import FireConfig from '../FirebaseConfig/FireConfig';
+import firebase from "firebase";
 import Header from "./Header/Header";
 import Drawer from "./Drawer/Drawer";
 import Backdrop from "./Backdrop/Backdrop";
@@ -13,7 +14,7 @@ import About from "./Pages/About";
 import Home from "./Home";
 import "./Index.css";
 
-import firebase from "firebase";
+
 
 class Index extends Component {
 	constructor(props) {
@@ -21,26 +22,26 @@ class Index extends Component {
 		this.state = {
 			activeDisplay: 2,
 			drawerVisible: false,
-			userImage : "",
+			userImage: "",
 			userName: ""
 		};
 	}
 
-	componentDidMount(){		
-		firebase.auth().onAuthStateChanged(user => {
+	componentDidMount() {
+		FireConfig.auth().onAuthStateChanged(user => {
 			if (user) {
-				this.getUserImage(user.email)
+				this.getUserImage(user.email);
 			} else {
 				this.setState({ userImage: null });
 			}
-		});		
+		});
 	}
 
-	getUserImage=(userEmail)=>{
+	getUserImage = userEmail => {
 		const firestore = firebase.firestore();
-		const settings = {/* your settings... */ timestampsInSnapshots: true};
-		firestore.settings(settings); 
-		
+		const settings = { /* your settings... */ timestampsInSnapshots: true };
+		firestore.settings(settings);
+
 		firebase
 			.firestore()
 			.collection("mailerz")
@@ -48,12 +49,12 @@ class Index extends Component {
 			.onSnapshot(querySnapshot => {
 				querySnapshot.forEach(doc => {
 					this.setState({
-						userImage : doc.data().userImage,
+						userImage: doc.data().userImage,
 						userName: doc.data().userName
-					})
-				})
-			})
-	}
+					});
+				});
+			});
+	};
 
 	openDrawer = () => {
 		this.setState(prevState => {
@@ -66,34 +67,24 @@ class Index extends Component {
 	};
 
 	signout = () => {
-		FireConfig.auth()
+		firebase.auth()
 			.signOut()
 			.then(console.log("User successfully signed out"));
 	};
 
-	changeDisplay = event => {					
+	changeDisplay = event => {
 		this.setState({ activeDisplay: parseInt(event.target.id, 10) });
 		this.closeDrawer();
 	};
 
-	showDisplay = index => {
-		
-		if(index === 1)
-			return <Profile />;
-		else if (index === 2)
-			return <Home />;
-		else if (index === 3)
-			return <Rate />;
-		else if (index === 4)
-			return <FAQs/>
-		else if(index === 5)
-			return <Settings/>
-		else if(index === 6)
-			return <Rate/>
-		else if(index === 7)
-			return <About/>
-		else 
-			return console.log("Wrong entry made");		
+	showDisplay = index => {		
+		if (index === 1) return <Profile />;
+		else if (index === 2) return <Home />;
+		else if (index === 3) return <Rate />;
+		else if (index === 4) return <FAQs />;
+		else if (index === 5) return <Settings />;
+		else if (index === 6) return <About />;
+		else return console.log("Wrong entry made");
 	};
 
 	render() {
@@ -114,7 +105,7 @@ class Index extends Component {
 				/>
 				{the_backdrop}
 				<div className="content_area">
-					<div className="homeContent">						
+					<div className="homeContent">
 						{this.showDisplay(this.state.activeDisplay)}
 					</div>
 				</div>

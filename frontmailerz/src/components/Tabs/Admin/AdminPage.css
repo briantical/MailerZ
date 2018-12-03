@@ -5,32 +5,42 @@ table{
 
 .user {
     display: flex;
-    align-items: center; 
-    justify-content: center  
+    align-items: center;     
 }
 
 .userImage {
-    height: 60px;
-    width: 60px;
-    border-radius: 60px;
-    border-color: crimson;
+    height: 95%;
+    width: auto;
+    border-radius: 50%;
+    display: flex;   
     align-items: center;    
-    justify-content: center;    
-    background-position: center    
+    justify-content: center; 
+    align-self: flex-start;       
 }
 
 .profilePic{
     height: 60px;
     width:  60px;
     border-radius: 60px;
+    align-self: center;
+    border-width: 2px;
+    border-color: #090446;
 }
 
 .userName {
+    padding-left: 10px;   
     align-items: center;
     justify-content: center;
+    font-size: small
 }
-
+.userNameText{
+    font-weight: bold;
+    font-size: small;
+    vertical-align: bottom;
+}
 .textContainer {
+    font-size: small;
+    display: flex;
     align-items: center;
     justify-content: center
 }
@@ -65,4 +75,62 @@ table{
     border-bottom-width: 2px;
     border-bottom-style: double;
     border-bottom-color: darkblue;
+}
+
+th{
+    font-weight: bold;
+    font-size: medium;
+}
+
+td{
+    text-align: center;
+    font-size: small;
+    font-style: italic;
+}
+
+.mailersContainerA{
+    background-color: #FFF;	
+    margin-bottom: 10px;
+}
+.mailersHeaderA{	
+	height: 5vh;
+	background-color: #090446;	
+	padding-right: 10px;	
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	color: #FFF;
+	font-size: medium
+}
+
+.theBatchContainerA{
+	box-shadow: 1px 0px 7px rgba(0, 0, 0, 0.5);
+	margin-top: 10px;
+	display: flex;
+	align-items: center
+}
+
+.theBatchDetailsA{	
+	height: 100%;
+}
+
+.batchIndexA{
+	font-size: small;		
+	color: #090446;
+	padding-left: 4px;	
+}
+.batchCellHeadersA{
+	color: #090446;
+	text-align: center;
+	padding-left: 10px;
+	font-size: small;
+	font-weight: bold;
+}
+
+.batchCellValuesA{
+	color: #090446;
+	text-align: left;
+	padding-left: 0px;
+	font-size: small;
+	font-style: italic;
 }

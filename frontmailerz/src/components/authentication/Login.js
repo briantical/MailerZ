@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import FireConfig from "../FirebaseConfig/FireConfig";
-import './auth.css'
-
+import firebase from "firebase";
+import "./auth.css";
+import {Warning} from "@material-ui/icons";
 class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			email: "",
-			password: ""
+			password: "",
+			errorMessage: "",
+			toastVisible: false
 		};
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,59 +26,75 @@ class Login extends Component {
 	}
 
 	signin(email, password) {
-		FireConfig.auth()
+		firebase.auth()
 			.signInWithEmailAndPassword(email, password)
 			.then(console.log("user successfully signed in"))
-			.catch(error => {
-				var errorMessage = error.message;
-				console.log("Error : " + errorMessage);
+			.catch(error => {				
+				this.setState({errorMessage: error.message, toastVisible: true})
+				console.log("Error : " + error.message);
 			});
 	}
 
 	render() {
+		const {toastVisible } = this.state
 		return (
 			<div className="login_container">
-				<div className="mailersBackgroundImage">
-				</div>
+				<div className="mailersBackgroundImage" />
 				<div className="theFormContainer">
-				<form>
-					<table width="400px">
-						<tbody>
-							<tr>
-								<td>Email: </td>
-								<td>
-									<input
-										name="email"
-										type="text"
-										value={this.state.email}
-										onChange={this.handleChange}
-									/>
-								</td>
-							</tr>
-							<tr>
-								<td>Password:</td>
-								<td>
-									<input
-										name="password"
-										type="password"
-										value={this.state.password}
-										onChange={this.handleChange}
-									/>
-								</td>
-							</tr>
-							<tr>
-								<td cols="2">
-									<input
-										type="submit"
-										value="Submit"
-										onClick={this.handleSubmit}
-									/>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</form>
+					<form autoComplete="off">
+						<table>
+							<tbody>
+								<tr>
+									<td className="positionAlign">Email: </td>
+									<td className="positionAlign">
+										<input
+											name="email"
+											type="text"
+											value={this.state.email}
+											onChange={this.handleChange}
+											required
+											maxLength="25"											
+										/>
+									</td>
+								</tr>
+								<tr>
+									<td className="positionAlign">Password:</td>
+									<td className="positionAlign">
+										<input
+											name="password"
+											type="password"
+											value={this.state.password}
+											onChange={this.handleChange}
+											required
+											maxLength="15"										
+										/>
+									</td>
+								</tr>
+								<tr>
+									<td colSpan="2">									
+										<input
+											className="btn"
+											type="submit"
+											value="LOGIN"
+											onClick={this.handleSubmit}
+										/>										
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>					
 				</div>
+				{ 
+					toastVisible ? 
+					(
+						<div className="errToast" onClick={()=>this.setState({toastVisible: false})}>
+							<p><Warning /></p>
+							<p className="errorMessage">{`Warning: ${this.state.errorMessage}`}</p>
+						</div>
+					)
+					:
+					null
+				}
 			</div>
 		);
 	}

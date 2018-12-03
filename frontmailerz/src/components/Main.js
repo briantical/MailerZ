@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch } from "react-router-dom";
-import FireConfig from "./FirebaseConfig/FireConfig";
+import firebase from "firebase";
 
 import Login from "./authentication/Login";
 import Index from "./Tabs/Index";
@@ -19,7 +19,7 @@ export class Main extends Component {
 	}
 
 	authenticate() {
-		FireConfig.auth().onAuthStateChanged(user => {
+		firebase.auth().onAuthStateChanged(user => {
 			if (user) {
 				this.setState({ user });
 			} else {
